@@ -26,7 +26,7 @@ var TabBar = React.createClass({
     },
     handleClick: function(e, t) {
         this.setState({selected: e});
-        $(window.ContainerTarget).load(t);
+        window.ContainerTarget.contentWindow.location.href = t;
     },
     render: function() {
         var self = this;

@@ -41,12 +41,13 @@ ReactDOM.render(<ClickButton />, document.getElementById('body'));
 
 function main()
 {
-    window.ContainerTarget = $("#mainContent");
+    window.ContainerTarget = document.getElementById("mainContent");
 
     CreateCircleImage(49, 49, "profile-picture");
     CreateTabs([ [ "News", "html_includes/news.html" ], [ "Update", "html_includes/update.html" ], [ "Comments", "html_includes/comments.html" ] ]);
 
-    $("#mainContent").load("html_includes/news.html");
+    //$("#mainContent").load("html_includes/news.html");
+    window.ContainerTarget.contentWindow.location.href = "html_includes/news.html";
 }
 
 main();
