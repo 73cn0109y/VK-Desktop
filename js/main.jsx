@@ -36,45 +36,5 @@ ReactDOM.render(<LikeButton />, document.getElementById('body'));*/
     }
 });
 
-ReactDOM.render(<ClickButton />, document.getElementById('body'));*/
-
-var TopBarTabButton = React.createClass({
-    getInitialState: function(){
-        return { isSelected: false };
-    },
-    onClicked: function(){
-        this.setState({ isSelected: true });
-        this.props.callbackParent(this.props.name);
-    },
-    render: function(){
-        var selectorClassName = classNames(
-            "topbar-tab-selector",
-            { "selected": (this.props.selected == this.props.name) });
-        return(
-            <div className="topbar-tab" onClick={this.onClicked}>
-                {this.props.name}
-                <div className={selectorClassName} />
-            </div>
-        );
-    }
-});
-
-var TabBar = React.createClass({
-    getInitialState: function(){
-        return { selected: "News" }
-    },
-    handleClick: function(e){
-        this.setState({ selected: e });
-    },
-    render: function(){
-        return (
-            <div>
-                <TopBarTabButton name="News" selected={this.state.selected} callbackParent={this.handleClick} />
-                <TopBarTabButton name="Update" selected={this.state.selected} callbackParent={this.handleClick} />
-                <TopBarTabButton name="Comments" selected={this.state.selected} callbackParent={this.handleClick} />
-            </div>
-        );
-    }
-});
-
-ReactDOM.render(<TabBar />, document.getElementById('center-topbar'));
+ReactDOM.render(<ClickButton />, document.getElementById('body'));
+*/
