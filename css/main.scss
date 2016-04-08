@@ -1,6 +1,8 @@
-$topbar-back-color: #527397;
-$sidebar-back-color: #17181a;
-$topbar-height: 50px;
+$topbar-backcolor: #527397;
+$topbar-selector-backcolor: #b3d1f2;
+$sidebar-left-backcolor: #17181a;
+$sidebar-right-backcolor: #f7f7f7;
+$topbar-height: 60px;
 
 body {
     background-color: #f2f5f7;
@@ -9,18 +11,18 @@ body {
 
 .container-left {
     position        : absolute;
-    background-color: $sidebar-back-color;
+    background-color: $sidebar-left-backcolor;
     width           : 15%;
     height          : 100%;
     left            : 0;
     top             : 0;
 
     .topbar {
-        background-color: rgba($topbar-back-color, 0.9);
+        background-color: rgba($topbar-backcolor, 0.7);
     }
 }
 
-.container {
+.container-body {
     position        : absolute;
     width           : 60%;
     background-color: white;
@@ -30,11 +32,12 @@ body {
 }
 
 .container-right {
-    position: absolute;
-    width   : 25%;
-    height  : 100%;
-    right   : 0;
-    top     : 0;
+    position        : absolute;
+    width           : 25%;
+    height          : 100%;
+    background-color: $sidebar-right-backcolor;
+    right           : 0;
+    top             : 0;
 }
 
 .content {
@@ -46,5 +49,31 @@ body {
 .topbar {
     height          : $topbar-height;
     width           : 100%;
-    background-color: $topbar-back-color;
+    background-color: $topbar-backcolor;
+    padding-left    : 28px;
+    padding-right   : 28px;
+
+    div &-tab {
+        position    : relative;
+        display     : inline-block;
+        height      : $topbar-height;
+        color       : white;
+        text-align  : center;
+        padding     : 17px 10px;
+        margin-right: 10px;
+        cursor      : pointer;
+
+        div &-selector {
+            position: absolute;
+            left    : 0;
+            bottom  : 0;
+            //background-color: $topbar-selector-backcolor;
+            height  : 5px;
+            width   : 100%;
+        }
+
+        div &-selector.selected {
+            background-color: $topbar-selector-backcolor;
+        }
+    }
 }
