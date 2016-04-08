@@ -14,21 +14,21 @@
     <script src="https://fb.me/react-dom-15.0.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.28.5/react-bootstrap.js"></script>
-
-    <!-- scripts -->
-    <script type="text/jsx" src="js/main.jsx"></script>
 </head>
 
 <body>
     <div class="container-left">
         <div class="topbar"></div>
-        <div class="content"></div>
+        <div class="content">
+            <div class="profile-info">
+                <div id="profile-picture"></div>
+                <span class="profile-name">Alexander<br/>Arzamastsev</span>
+            </div>
+        </div>
     </div>
 
     <div class="container-body">
-        <div class="topbar" id="topbar">
-            <script src="js/topbar.jsx" type="text/jsx"></script>
-        </div>
+        <div class="topbar" id="topbar"></div>
         <div class="content"></div>
     </div>
 
@@ -36,6 +36,13 @@
         <div class="topbar"></div>
         <div class="content"></div>
     </div>
+
+    <script src="js/topbar.jsx" type="text/jsx"></script>
+    <script src="js/image.jsx" type="text/jsx"></script>
+    <script>
+        window.tabs = new Array("News", "Update", "Comments");
+    </script>
+    <script src="./js/main.jsx" type="text/jsx"></script>
 </body>
 
 </html>

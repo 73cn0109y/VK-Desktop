@@ -38,3 +38,10 @@ ReactDOM.render(<LikeButton />, document.getElementById('body'));*/
 
 ReactDOM.render(<ClickButton />, document.getElementById('body'));
 */
+
+function main()
+{
+    CreateRoundedImage(49, 49, "profile-picture");
+}
+
+main();

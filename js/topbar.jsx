@@ -41,4 +41,5 @@ var TabBar = React.createClass({
     }
 });
 
-ReactDOM.render(<TabBar items={["News", "Update", "Comments"]} />, document.getElementById('topbar'));
+if(window.tabs != null)
+    ReactDOM.render(<TabBar items={window.tabs} />, document.getElementById('topbar'));
