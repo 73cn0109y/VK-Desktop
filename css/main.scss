@@ -1,1 +1,50 @@
-$topbar-back-color: #0072bc;
+$topbar-back-color: #527397;
+$sidebar-back-color: #17181a;
+$topbar-height: 50px;
+
+body {
+    background-color: #f2f5f7;
+    overflow        : hidden;
+}
+
+.container-left {
+    position        : absolute;
+    background-color: $sidebar-back-color;
+    width           : 15%;
+    height          : 100%;
+    left            : 0;
+    top             : 0;
+
+    .topbar {
+        background-color: rgba($topbar-back-color, 0.9);
+    }
+}
+
+.container {
+    position        : absolute;
+    width           : 60%;
+    background-color: white;
+    height          : 100%;
+    left            : 15%;
+    top             : 0;
+}
+
+.container-right {
+    position: absolute;
+    width   : 25%;
+    height  : 100%;
+    right   : 0;
+    top     : 0;
+}
+
+.content {
+    position: relative;
+    height  : 100%;
+    width   : 100%;
+}
+
+.topbar {
+    height          : $topbar-height;
+    width           : 100%;
+    background-color: $topbar-back-color;
+}
