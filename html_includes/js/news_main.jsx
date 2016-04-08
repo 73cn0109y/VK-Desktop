@@ -7,11 +7,44 @@ var NewsData = function (_id, _title, _content, _image)
 }
 
 var NewsItem = React.createClass({
+    getInitialState: function(){
+        return { height: 0 }
+    },
+    componentDidMount: function(){
+        //console.log(ReactDOM.findDOMNode(this).offsetWidth);
+        this.setState({ height: -(ReactDOM.findDOMNode(this).offsetHeight) });
+    },
     render: function(){
-        var id = "news-item-" + this.props.id;
+        var style = {
+            left: this.props.left,
+            top: (this.props.data.ID == 0 ? 0 : this.state.height + 10)
+        };
+        var headerSplitClass = classNames(
+            "hasText",
+            { "visible": (this.props.data.Content != null) }
+        );
         return (
-            <div id={id}>
-                {this.props.title}
+            <div id={this.props.data.ID} className="news-item" style={style}>
+                <div className="header">
+                    <div className="user-picture">
+                        <CircleImage size={[49, 49]} />
+                    </div>
+                    <div className="item-title">
+                        {this.props.data.Title}
+                    </div>
+                    <div className="item-timediff">
+                        18 minutes ago
+                    </div>
+                    <div className="item-hide">X</div>
+                    <hr className={headerSplitClass} />
+                </div>
+                <div className="content">
+                    {this.props.data.Content}
+                    <ReactBootstrap.Image src={this.props.data.Image} className="content-image" />
+                </div>
+                <div className="feedback">
+
+                </div>
             </div>
         );
     }
@@ -19,11 +52,18 @@ var NewsItem = React.createClass({
 
 var NewsPage = React.createClass({
     render: function(){
+        var left = "5%";
         return (
             <div id="news-page">
                 { this.props.items.map(function(item, i){
+                    if(i % 2 == 0 && i != 0){
+                        left = "5%";
+                    }
+                    else if(i != 0){
+                        left = "50%";
+                    }
                     return (
-                        <NewsItem id={item.ID} title={item.Title} key={i} />
+                        <NewsItem data={item} key={i} left={left} />
                     );
                 })}
             </div>
@@ -31,23 +71,14 @@ var NewsPage = React.createClass({
     }
 });
 
-/*function GenerateNewsItem(data, targetID)
-{
-    ReactDOM.render(
-        <NewsItem id={data.ID} title={data.Title} />,
-        document.getElementById(targetID)
-    );
-}*/
-
 function SampleNews()
 {
     var news = new Array();
-    news.push(new NewsData(0, "Test 1", "This is a sample", null));
-    news.push(new NewsData(1, "Test 2", "This is a sample", null));
-    news.push(new NewsData(2, "Test 3", "This is a sample", null));
-    news.push(new NewsData(3, "Test 4", "This is a sample", null));
+    news.push(new NewsData(0, "Headhunterz shared a link.", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", null));
+    news.push(new NewsData(1, "Akon", "Let's get it started!", null));
+    news.push(new NewsData(2, "Akon", "Let's get it started!", null));
+    news.push(new NewsData(3, "Headhunterz shared a link.", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", "https://external-syd1-1.xx.fbcdn.net/safe_image.php?d=AQDCuo4QGJ9WyDyW&w=470&h=246&url=http%3A%2F%2Fcdn-uza9x79xqk.s3.amazonaws.com%2Fsites%2F24%2F2016%2F04%2F07184347%2Fbeps2-2.jpg&cfs=1&upscale=1&sx=1&sy=0&sw=1198&sh=627&ext=png2jpg"));
 
-    //GenerateNewsItem(news, "news-board");
     ReactDOM.render(<NewsPage items={news} />, document.getElementById("news-board"));
 }
 
