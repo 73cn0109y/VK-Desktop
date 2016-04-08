@@ -4,6 +4,7 @@ $sidebar-left-backcolor: #17181a;
 $sidebar-right-backcolor: #f7f7f7;
 $topbar-height: 60px;
 $profile-name-color: #c2c7cc;
+$dropshadow-color: #dcdfe1;
 
 body {
     background-color: #f2f5f7;
@@ -39,15 +40,22 @@ body {
     background-color: $sidebar-right-backcolor;
     right           : 0;
     top             : 0;
+
+    .content {
+        box-shadow: 0 0 10px $dropshadow-color;
+    }
 }
 
 .content {
     position: relative;
     height  : 100%;
     width   : 100%;
+    top     : $topbar-height;
 }
 
 .topbar {
+    position        : absolute;
+    z-index         : 1;
     height          : $topbar-height;
     width           : 100%;
     background-color: $topbar-backcolor;
@@ -79,10 +87,10 @@ body {
 }
 
 .content .profile-info {
-    height    : 100px;
-    padding   : 15px 0;
-    margin-top: 10px;
-    width     : 100%;
+    position: absolute;
+    height  : 100px;
+    padding : 15px 0;
+    width   : 100%;
 
     #profile-picture {
         margin-left: 20px;

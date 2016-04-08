@@ -41,7 +41,12 @@ ReactDOM.render(<ClickButton />, document.getElementById('body'));
 
 function main()
 {
-    CreateRoundedImage(49, 49, "profile-picture");
+    window.ContainerTarget = $("#mainContent");
+
+    CreateCircleImage(49, 49, "profile-picture");
+    CreateTabs([ [ "News", "html_includes/news.html" ], [ "Update", "html_includes/update.html" ], [ "Comments", "html_includes/comments.html" ] ]);
+
+    $("#mainContent").load("html_includes/news.html");
 }
 
 main();
