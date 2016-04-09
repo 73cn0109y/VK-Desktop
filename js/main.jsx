@@ -44,7 +44,7 @@ function main()
     window.ContainerTarget = document.getElementById("mainContent");
 
     CreateCircleImage(49, 49, "profile-picture");
-    CreateTabs([ [ "News", "html_includes/news.html" ], [ "Update", "html_includes/update.html" ], [ "Comments", "html_includes/comments.html" ] ]);
+    CreateTabs([ [ "News", "html_includes/news.html" ], [ "Update", "html_includes/update.html" ], [ "Comments", "html_includes/comments.html" ] ], 'topbar');
 
     //$("#mainContent").load("html_includes/news.html");
     window.ContainerTarget.contentWindow.location.href = "html_includes/news.html";

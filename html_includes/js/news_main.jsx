@@ -1,4 +1,5 @@
 var itemHeights = new Array();
+var preloadImages = [];
 
 var NewsData = function (_id, _title, _content, _image)
 {
@@ -9,19 +10,34 @@ var NewsData = function (_id, _title, _content, _image)
 }
 
 var NewsItem = React.createClass({
+    getInitialState: function(){
+        return { imageHeight: 0, itemHeightsIndex: 0 };
+    },
     componentDidMount: function(){
+        if(this.props.data.Image != null) {
+            var self = this;
+            getImageSize(this.props.data.Image, function(width, height){
+                self.setState({ imageHeight: height });
+                itemHeights[self.state.itemHeightsIndex][1] = ReactDOM.findDOMNode(self).offsetHeight;
+                PositionNewsItems();
+            });
+        }
         itemHeights.push(new Array(
             ReactDOM.findDOMNode(this),
-            ReactDOM.findDOMNode(this).offsetHeight)
+            (this.state.imageHeight == 0 ? ReactDOM.findDOMNode(this).offsetHeight : this.state.imageHeight))
         );
+        this.setState({itemHeightsIndex: itemHeights.length - 1});
     },
     render: function(){
         var headerSplitClass = classNames(
             "hasText",
             { "visible": (this.props.data.Content != null) }
         );
+        var style = {
+            "width": (this.props.width == 0 ? "44%" : this.props.width),
+        };
         return (
-            <div id={this.props.data.ID} className="news-item">
+            <div id={this.props.data.ID} className="news-item" style={style}>
                 <div className="header">
                     <div className="user-picture">
                         <CircleImage size={[49, 49]} />
@@ -37,6 +53,7 @@ var NewsItem = React.createClass({
                 </div>
                 <div className="content">
                     {this.props.data.Content}
+                    <br />
                     <ReactBootstrap.Image src={this.props.data.Image} className="content-image" />
                 </div>
                 <div className="feedback">
@@ -47,13 +64,49 @@ var NewsItem = React.createClass({
     }
 });
 
+function getImageSize(imgsrc, callback) {
+    var $img = document.createElement("img");
+    $img.src = imgsrc;
+
+    var wait = setInterval(function() {
+        var w = $img.width,
+            h = $img.height;
+        if (w && h) {
+            clearInterval(wait);
+            callback.apply(this, [w, h]);
+        }
+    }, 30);
+}
+
 var NewsPage = React.createClass({
+    getInitialState: function(){
+        return { width: 0 };
+    },
+    updateDimensions: function(){
+        var target = document.getElementById(this.props.containerID);
+        var width = target.offsetWidth;
+        width *= 0.95; // minus 5% on each side
+        width /= 2;
+        width *= 0.925;
+        this.setState({ width: width });
+    },
+    componentWillMount: function(){
+        this.updateDimensions();
+    },
+    componentDidMount: function(){
+        window.addEventListener("resize", this.updateDimensions);
+    },
+    componentWillUnmount: function(){
+        window.removeEventListener("resize", this.updateDimensions);
+    },
     render: function(){
+        var self = this;
+        console.log("render");
         return (
             <div id="news-page">
                 { this.props.items.map(function(item, i){
                     return (
-                        <NewsItem data={item} key={i} />
+                        <NewsItem data={item} key={i} width={self.state.width} />
                     );
                 })}
             </div>
@@ -67,14 +120,32 @@ function SampleNews()
     news.push(new NewsData(0, "Item 0", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", null));
     news.push(new NewsData(1, "Item 1", "Let's get it started!", null));
     news.push(new NewsData(2, "Item 2", "Let's get it started!", null));
-    news.push(new NewsData(3, "Item 3", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", "https://external-syd1-1.xx.fbcdn.net/safe_image.php?d=AQDCuo4QGJ9WyDyW&w=470&h=246&url=http%3A%2F%2Fcdn-uza9x79xqk.s3.amazonaws.com%2Fsites%2F24%2F2016%2F04%2F07184347%2Fbeps2-2.jpg&cfs=1&upscale=1&sx=1&sy=0&sw=1198&sh=627&ext=png2jpg"));
+    news.push(new NewsData(3, "Item 3", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", "./imgs/news/001.jpg"));
     news.push(new NewsData(4, "Item 4", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", null));
     news.push(new NewsData(5, "Item 5", "Let's get it started!", null));
     news.push(new NewsData(6, "Item 6", "Let's get it started!", null));
     news.push(new NewsData(7, "Item 7", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", null));
 
-    ReactDOM.render(<NewsPage items={news} />, document.getElementById("news-board"));
+    for(var i = 0; i < news.length; i++)
+    {
+        if(news[i].Image != null)
+        {
+            var img = new Image();
+            img.src = news[i].Image;
+            preloadImages.push(img);
+        }
+        else {
+            preloadImages.push(null);
+        }
+    }
 
+    ReactDOM.render(<NewsPage items={news} containerID="news-board" />, document.getElementById("news-board"));
+
+    PositionNewsItems();
+}
+
+function PositionNewsItems()
+{
     var colPositions = new Array(10, 10);
 
     for(var i = 0; i < itemHeights.length; i++)
@@ -115,3 +186,13 @@ function SampleNews()
 }
 
 SampleNews();
+CreateNewsTab( [
+    [ "Tape", "" ],
+    [ "Photos", "" ],
+    [ "Videos", "" ],
+    [ "Recommendations", "" ],
+    [ "Friends", "" ],
+    [ "Community", "" ],
+    [ "Articles", "" ],
+    [ "Like", "" ]
+], 'news-tabs');

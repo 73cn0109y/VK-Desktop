@@ -11,13 +11,19 @@ body {
     overflow        : hidden;
 }
 
+.news-container {
+    min-width: 800px;
+}
+
 .container-left {
+    display         : inline-block;
     position        : absolute;
     background-color: $sidebar-left-backcolor;
     width           : 15%;
     height          : 100%;
     left            : 0;
     top             : 0;
+    min-width       : 200px !important;
 
     .topbar {
         background-color: rgba($topbar-backcolor, 0.7);
