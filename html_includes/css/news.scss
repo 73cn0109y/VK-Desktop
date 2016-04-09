@@ -62,9 +62,10 @@ body {
 #news-page {
     position: relative;
     height  : 100%;
+    overflow: hidden;
 
     .news-item {
-        position  : relative;
+        position  : absolute;
         width     : 44%;
         min-width : 490px;
         box-shadow: 0 0 5px $dropshadow-color;
