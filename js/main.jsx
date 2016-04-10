@@ -42,6 +42,20 @@ ReactDOM.render(<ClickButton />, document.getElementById('body'));
 function main() {
     window.ContainerTarget = document.getElementById("mainContent");
 
+    CreatePageBar([
+        [ "Profile", GenRandom(-10, 10) ],
+        [ "Friends", GenRandom(-10, 10) ],
+        [ "Photos", GenRandom(-10, 10) ],
+        [ "Videos", GenRandom(-10, 10) ],
+        [ "Music", GenRandom(-10, 10) ],
+        [ "Messages", GenRandom(-10, 10) ],
+        [ "Communities", GenRandom(-10, 10) ],
+        [ "News", GenRandom(-10, 10) ],
+        [ "Feedback", GenRandom(-10, 10) ],
+        [ "Bookmarks", GenRandom(-10, 10) ],
+        [ "Settings", GenRandom(-10, 10) ]
+    ], 'page-tabs');
+
     CreateCircleImage(49, 49, "profile-picture");
     CreateTabs([
         [
@@ -83,6 +97,10 @@ function PositionSizing() {
     } else {
         containerBody.style.left = "";
     }
+}
+
+function GenRandom(min, max) {
+    return Math.floor(Math.random() * (max - min +1)) + min;
 }
 
 setTimeout(PositionSizing(), 10);

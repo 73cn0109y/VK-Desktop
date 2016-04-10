@@ -12,6 +12,15 @@ body {
     min-width       : 1250px;
 }
 
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select  : none;
+    -khtml-user-select   : none;
+    -moz-user-select     : none;
+    -ms-user-select      : none;
+    user-select          : none;
+}
+
 .container-left {
     display         : inline-block;
     position        : absolute;
@@ -161,24 +170,32 @@ body {
 }
 
 .content .page-tabs {
-    position     : relative;
-    width        : 100%;
-    top          : 200px;
-    padding-left : 40px;
-    padding-right: 40px;
+    position: relative;
+    width   : 100%;
+    top     : 200px;
+    cursor  : pointer;
 
-    .tab {}
+    .tab:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .tab:active {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 
     div.img {
-        width : 25px;
-        height: 20px;
+        position: relative;
+        width   : 25px;
+        height  : 20px;
+        top     : 10px;
+        left    : 40px;
     }
 
     div.title {
         position    : relative;
         line-height : 20px;
-        top         : -20px;
-        left        : 25px;
+        top         : -10px;
+        left        : 60px;
         padding-left: 35px;
         color       : #aaaeb3;
     }
@@ -190,10 +207,22 @@ body {
         width           : 30px;
         height          : 20px;
         float           : right;
-        top             : -40px;
+        top             : -30px;
         color           : white;
         text-align      : center;
-        right           : -10px;
+        right           : 25px;
+    }
+
+    .selected {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .selected:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .selected:active {
+        background-color: rgba(0, 0, 0, 0.7);
     }
 }
 
