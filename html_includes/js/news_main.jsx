@@ -36,6 +36,11 @@ var NewsItem = React.createClass({
         var style = {
             "width": (this.props.width == 0 ? "44%" : this.props.width),
         };
+        var imgStyle = {
+            background: 'url("' + this.props.data.Image + '") no-repeat center center',
+            height: this.state.imageHeight,
+            backgroundSize: "contain"
+        };
         return (
             <div id={this.props.data.ID} className="news-item" style={style}>
                 <div className="header">
@@ -54,7 +59,7 @@ var NewsItem = React.createClass({
                 <div className="content">
                     {this.props.data.Content}
                     <br />
-                    <ReactBootstrap.Image src={this.props.data.Image} className="content-image" />
+                    <div style={imgStyle}></div>
                 </div>
                 <div className="feedback">
 

@@ -156,9 +156,10 @@ body {
         }
 
         .content-image {
-            position   : relative;
-            left       : -5px;
-            padding-top: 20px;
+            position       : relative;
+            left           : -5px;
+            padding-top    : 20px;
+            background-size: contain;
         }
     }
 }

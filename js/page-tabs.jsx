@@ -1,11 +1,3 @@
-/*
-<div class="page-tabs-settings tab no-select">
-    <div class="img" style="background: url('./imgs/settings_icon.png') no-repeat center center;"></div>
-    <div class="title">Settings</div>
-    <div id="notification-count" style="display: none;"></div>
-</div>
-*/
-
 var PageTab = React.createClass({
     getInitialState: function() {
         return {isSelected: false};
