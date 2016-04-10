@@ -39,12 +39,19 @@ ReactDOM.render(<LikeButton />, document.getElementById('body'));*/
 ReactDOM.render(<ClickButton />, document.getElementById('body'));
 */
 
-function main()
-{
+function main() {
     window.ContainerTarget = document.getElementById("mainContent");
 
     CreateCircleImage(49, 49, "profile-picture");
-    CreateTabs([ [ "News", "html_includes/news.html" ], [ "Update", "html_includes/update.html" ], [ "Comments", "html_includes/comments.html" ] ], 'topbar');
+    CreateTabs([
+        [
+            "News", "html_includes/news.html"
+        ],
+        [
+            "Update", "html_includes/update.html"
+        ],
+        ["Comments", "html_includes/comments.html"]
+    ], 'topbar');
 
     //$("#mainContent").load("html_includes/news.html");
     window.ContainerTarget.contentWindow.location.href = "html_includes/news.html";
@@ -52,26 +59,30 @@ function main()
 
 main();
 
-window.onresize = function(e){
+window.onresize = function(e) {
+    PositionSizing();
+};
+
+function PositionSizing() {
     var hideTarget = document.getElementById("Container-Right");
     var containerBody = document.getElementById("Container-Body");
     var containerLeft = document.getElementById("Container-Left");
 
-    if(document.body.offsetWidth <= 1670)
-    {
+    if (document.body.offsetWidth <= 1670) {
         hideTarget.className = "container-right hidden";
         containerBody.className = "container-body extended";
         containerLeft.className = "container-left extended";
-    }
-    else
-    {
+    } else {
         hideTarget.className = "container-right";
         containerBody.className = "container-body";
         containerLeft.className = "container-left";
     }
 
-    if(document.body.offsetWidth <= 1250)
+    if (document.body.offsetWidth <= 1250) {
         containerBody.style.left = 250;
-    else
+    } else {
         containerBody.style.left = "";
+    }
 }
+
+setTimeout(PositionSizing(), 10);
