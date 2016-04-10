@@ -51,3 +51,27 @@ function main()
 }
 
 main();
+
+window.onresize = function(e){
+    var hideTarget = document.getElementById("Container-Right");
+    var containerBody = document.getElementById("Container-Body");
+    var containerLeft = document.getElementById("Container-Left");
+
+    if(document.body.offsetWidth <= 1670)
+    {
+        hideTarget.className = "container-right hidden";
+        containerBody.className = "container-body extended";
+        containerLeft.className = "container-left extended";
+    }
+    else
+    {
+        hideTarget.className = "container-right";
+        containerBody.className = "container-body";
+        containerLeft.className = "container-left";
+    }
+
+    if(document.body.offsetWidth <= 1250)
+        containerBody.style.left = 250;
+    else
+        containerBody.style.left = "";
+}

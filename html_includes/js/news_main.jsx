@@ -1,4 +1,4 @@
-var itemHeights = new Array();
+var itemInfo = new Array();
 var preloadImages = [];
 
 var NewsData = function (_id, _title, _content, _image)
@@ -11,22 +11,22 @@ var NewsData = function (_id, _title, _content, _image)
 
 var NewsItem = React.createClass({
     getInitialState: function(){
-        return { imageHeight: 0, itemHeightsIndex: 0 };
+        return { imageHeight: 0, itemInfoIndex: 0 };
     },
     componentDidMount: function(){
         if(this.props.data.Image != null) {
             var self = this;
             getImageSize(this.props.data.Image, function(width, height){
                 self.setState({ imageHeight: height });
-                itemHeights[self.state.itemHeightsIndex][1] = ReactDOM.findDOMNode(self).offsetHeight;
+                itemInfo[self.state.itemInfoIndex][1] = ReactDOM.findDOMNode(self).offsetHeight;
                 PositionNewsItems();
             });
         }
-        itemHeights.push(new Array(
+        itemInfo.push(new Array(
             ReactDOM.findDOMNode(this),
             (this.state.imageHeight == 0 ? ReactDOM.findDOMNode(this).offsetHeight : this.state.imageHeight))
         );
-        this.setState({itemHeightsIndex: itemHeights.length - 1});
+        this.setState({itemInfoIndex: itemInfo.length - 1});
     },
     render: function(){
         var headerSplitClass = classNames(
@@ -101,7 +101,6 @@ var NewsPage = React.createClass({
     },
     render: function(){
         var self = this;
-        console.log("render");
         return (
             <div id="news-page">
                 { this.props.items.map(function(item, i){
@@ -148,40 +147,18 @@ function PositionNewsItems()
 {
     var colPositions = new Array(10, 10);
 
-    for(var i = 0; i < itemHeights.length; i++)
+    for(var i = 0; i < itemInfo.length; i++)
     {
         if(colPositions[0] <= colPositions[1]) {
-            itemHeights[i][0].style.left = "5%";
-            itemHeights[i][0].style.top = colPositions[0];
-            colPositions[0] += itemHeights[i][1] + 10;
+            itemInfo[i][0].style.left = "5%";
+            itemInfo[i][0].style.top = colPositions[0];
+            colPositions[0] += itemInfo[i][1] + 10;
         }
         else {
-            itemHeights[i][0].style.left = "50%";
-            itemHeights[i][0].style.top = colPositions[1];
-            colPositions[1] += itemHeights[i][1] + 10;
+            itemInfo[i][0].style.left = "50%";
+            itemInfo[i][0].style.top = colPositions[1];
+            colPositions[1] += itemInfo[i][1] + 10;
         }
-        /*if(i % 2 == 0)
-        {
-            itemHeights[i][0].style.left = "5%";
-            itemHeights[i][0].style.top = colPositions[0];
-            colPositions[0] += itemHeights[i][1] + 10;
-        }
-        else
-        {
-            if(colPositions[0] < colPositions[1]) {
-                itemHeights[i][0].style.left = "5%";
-                itemHeights[i][0].style.top = colPositions[0];
-                colPositions[0] += itemHeights[i][1] + 10;
-            }
-            else {
-                itemHeights[i][0].style.left = "50%";
-                itemHeights[i][0].style.top = colPositions[1];
-                colPositions[1] += itemHeights[i][1] + 10;
-            }
-
-            /*itemHeights[i][0].style.top = colPositions[1];
-            colPositions[1] += itemHeights[i][1] + 10;
-        }*/
     }
 }
 

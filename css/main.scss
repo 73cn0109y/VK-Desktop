@@ -9,10 +9,7 @@ $dropshadow-color: #dcdfe1;
 body {
     background-color: #f2f5f7;
     overflow        : hidden;
-}
-
-.news-container {
-    min-width: 800px;
+    min-width       : 1250px;
 }
 
 .container-left {
@@ -23,10 +20,14 @@ body {
     height          : 100%;
     left            : 0;
     top             : 0;
-    min-width       : 200px !important;
+    min-width       : 250px;
 
     .topbar {
         background-color: rgba($topbar-backcolor, 0.7);
+    }
+
+    &.extended {
+        width: 20% !important;
     }
 }
 
@@ -39,12 +40,18 @@ body {
     top             : 0;
 
     #mainContent {
-        position: absolute;
-        left    : 0;
-        top     : 0;
-        width   : 100%;
-        height  : 100%;
-        border  : none;
+        position : absolute;
+        left     : 0;
+        top      : 0;
+        width    : 100%;
+        height   : 100%;
+        border   : none;
+        min-width: 950px;
+    }
+
+    &.extended {
+        left : 20%;
+        width: 80%;
     }
 }
 
@@ -56,6 +63,11 @@ body {
     right           : 0;
     top             : 0;
     z-index         : 2;
+    display         : block;
+
+    .hidden {
+        display: none;
+    }
 
     .content {
         box-shadow: 0 0 10px $dropshadow-color;
