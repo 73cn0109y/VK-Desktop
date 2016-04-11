@@ -36,6 +36,7 @@ var PageTabBar = React.createClass({
     },
     handleClick: function(e, t) {
         this.setState({selected: e});
+        this.props.callback(e);
     },
     render: function() {
         var self = this;
@@ -52,15 +53,15 @@ var PageTabBar = React.createClass({
     }
 });
 
-function CreatePageBar(e, t) {
+function CreatePageBar(e, t, callback) {
     var selected = e[0][0];
 
     for (var i = 0; i < e.length; i++) {
-        if (e[i][2]) {
+        if (e[i][3]) {
             selected = e[i][0];
         }
     }
 
-    ReactDOM.render(<PageTabBar items={e} selected={selected}/>,
+    ReactDOM.render(<PageTabBar items={e} selected={selected} callback={callback} />,
         document.getElementById(t));
 }

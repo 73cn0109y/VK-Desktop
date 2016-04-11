@@ -1,16 +1,17 @@
+var overrideSelected = "";
+
 var TopBarTabButton = React.createClass({
     getInitialState: function() {
-        return { isSelected: false };
+        return {isSelected: false};
     },
     onClicked: function() {
-        this.setState({ isSelected: true });
+        this.setState({isSelected: true});
         this.props.callbackParent(this.props.name, this.props.target);
     },
     render: function() {
-        var selectorClassName = classNames(
-            "topbar-tab-selector",
-            { "selected": (this.props.selected == this.props.name) }
-        );
+        var selectorClassName = classNames("topbar-tab-selector", {
+            "selected": (this.props.selected == this.props.name)
+        });
         return (
             <div className="topbar-tab no-select" onClick={this.onClicked}>
                 {this.props.name}
@@ -22,17 +23,16 @@ var TopBarTabButton = React.createClass({
 
 var NewsTabButton = React.createClass({
     getInitialState: function() {
-        return { isSelected: false };
+        return {isSelected: false};
     },
     onClicked: function() {
-        this.setState({ isSelected: true });
+        this.setState({isSelected: true});
         this.props.callbackParent(this.props.name, this.props.target);
     },
     render: function() {
-        var styleclass = classNames(
-            "topbar-tab",
-            { "selected": (this.props.selected == this.props.name) }
-        );
+        var styleclass = classNames("topbar-tab", {
+            "selected": (this.props.selected == this.props.name)
+        });
         return (
             <div className={styleclass} onClick={this.onClicked}>
                 {this.props.name}
@@ -50,8 +50,17 @@ var TabBar = React.createClass({
     },
     handleClick: function(e, t) {
         this.setState({selected: e});
-        if(!this.state.isNewsBar){
-            window.ContainerTarget.contentWindow.location.href = t;
+        if (!this.state.isNewsBar) {
+            if(t != '') {
+                window.ContainerTarget.contentWindow.location.href = t;
+            }
+        }
+    },
+    componentDidUpdate: function(){
+        if(overrideSelected != ""){
+            this.setState({selected: overrideSelected});
+            overrideSelected = "";
+            this.render();
         }
     },
     render: function() {
@@ -59,16 +68,11 @@ var TabBar = React.createClass({
         var buildNews = (this.props.isNews != null);
         return (
             <div>
-                { this.props.items.map(function(item, i){
-                    if(!buildNews) {
-                        return (
-                            <TopBarTabButton name={item[0]} target={item[1]} key={i} selected={self.state.selected} callbackParent={self.handleClick} />
-                        );
-                    }
-                    else {
-                        return (
-                            <NewsTabButton name={item[0]} target={item[1]} key={i} selected={self.state.selected} callbackParent={self.handleClick} />
-                        );
+                {this.props.items.map(function(item, i) {
+                    if (!buildNews) {
+                        return (<TopBarTabButton name={item[0]} target={item[1]} key={i} selected={self.state.selected} callbackParent={self.handleClick}/>);
+                    } else {
+                        return (<NewsTabButton name={item[0]} target={item[1]} key={i} selected={self.state.selected} callbackParent={self.handleClick}/>);
                     }
                 })}
             </div>
@@ -76,12 +80,15 @@ var TabBar = React.createClass({
     }
 });
 
-function CreateTabs(e, t)
-{
-    ReactDOM.render(<TabBar items={e} />, document.getElementById(t));
+function CreateTabs(e, t, o) {
+    if(typeof o != 'undefined'){
+        overrideSelected = o;
+    }
+    ReactDOM.render(
+        <TabBar items={e}/>, document.getElementById(t));
 }
 
-function CreateNewsTab(e, t)
-{
-    ReactDOM.render(<TabBar items={e} isNews="true" />, document.getElementById(t));
+function CreateNewsTab(e, t) {
+    ReactDOM.render(
+        <TabBar items={e} isNews="true"/>, document.getElementById(t));
 }

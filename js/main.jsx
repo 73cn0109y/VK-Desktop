@@ -1,63 +1,105 @@
-/*var LikeButton = React.createClass({
-    getInitialState: function() {
-        return { liked: false };
-    },
-    handleClick: function(e) {
-        this.setState({ liked: !this.state.liked });
-    },
-    render: function() {
-        var text = this.state.liked ? 'like' : 'haven\'t liked';
-        return (
-            <p  onClick={this.handleClick}>
-                You {text} this. Click to toggle.
-            </p>
-        );
-    }
-});
+var NewsTabs = [
+    [
+        "News", "html_includes/news.html"
+    ],
+    [
+        "Update", "html_includes/update.html"
+    ],
+    ["Comments", "html_includes/comments.html"]
+];
 
-ReactDOM.render(<LikeButton />, document.getElementById('body'));*/
+var CommunityTabs = [
+    [
+        "My communities", ""
+    ],
+    [
+        "Managed communities", ""
+    ]
+];
 
-/*var ClickButton = React.createClass({
-    getInitialState: function(){
-        return { clicked: false }
-    },
-    handleClick: function(e){
-        this.setState({ clicked: !this.state.clicked });
-    },
-    render: function(){
-        var text = this.state.clicked ? "clicked" : "not clicked";
-        var btnClass = classNames({
-            'btn': true,
-            'btn-pressed': this.state.clicked
-        });
-        return(
-            <input type="button" onClick={this.handleClick} value={text} className={btnClass} />
-        );
-    }
-});
+var MusicTabs = [
+    [
+        "My music", ""
+    ],
+    [
+        "Recommendations", ""
+    ],
+    [
+        "Popular", ""
+    ],
+    [
+        "Genres", ""
+    ],
+    [
+        "Compilations", ""
+    ],
+    [
+        "Updates from friends", ""
+    ]
+];
 
-ReactDOM.render(<ClickButton />, document.getElementById('body'));
-*/
+var PageSections = [
+    [
+        "Profile",
+        GenRandom(-10, 10)
+    ],
+    [
+        "Friends",
+        GenRandom(-10, 10)
+    ],
+    [
+        "Photos",
+        GenRandom(-10, 10)
+    ],
+    [
+        "Videos",
+        GenRandom(-10, 10)
+    ],
+    [
+        "Music",
+        GenRandom(-10, 10),
+        MusicTabs
+    ],
+    [
+        "Messages",
+        GenRandom(-10, 10)
+    ],
+    [
+        "Communities",
+        GenRandom(-10, 10),
+        CommunityTabs
+    ],
+    [
+        "News",
+        GenRandom(-10, 10),
+        NewsTabs,
+        true
+    ],
+    [
+        "Feedback",
+        GenRandom(-10, 10)
+    ],
+    [
+        "Bookmarks",
+        GenRandom(-10, 10)
+    ],
+    [
+        "Settings",
+        GenRandom(-10, 10)
+    ]
+];
 
 function main() {
     window.ContainerTarget = document.getElementById("mainContent");
 
-    CreatePageBar([
-        [ "Profile", GenRandom(-10, 10) ],
-        [ "Friends", GenRandom(-10, 10) ],
-        [ "Photos", GenRandom(-10, 10) ],
-        [ "Videos", GenRandom(-10, 10) ],
-        [ "Music", GenRandom(-10, 10) ],
-        [ "Messages", GenRandom(-10, 10) ],
-        [ "Communities", GenRandom(-10, 10) ],
-        [ "News", GenRandom(-10, 10), true ],
-        [ "Feedback", GenRandom(-10, 10) ],
-        [ "Bookmarks", GenRandom(-10, 10) ],
-        [ "Settings", GenRandom(-10, 10) ]
-    ], 'page-tabs');
+    CreatePageBar(PageSections, 'page-tabs', ChangePageSection);
+    for(var i = 0; i < PageSections.length; i++){
+        if(PageSections[i][3])
+            ChangePageSection(PageSections[i][0]);
+    }
 
     CreateCircleImage(49, 49, "profile-picture");
-    CreateTabs([
+    /*CreateTabs([
         [
             "News", "html_includes/news.html"
         ],
@@ -65,9 +107,8 @@ function main() {
             "Update", "html_includes/update.html"
         ],
         ["Comments", "html_includes/comments.html"]
-    ], 'topbar');
+    ], 'topbar');*/
 
-    //$("#mainContent").load("html_includes/news.html");
     window.ContainerTarget.contentWindow.location.href = "html_includes/news.html";
 }
 
@@ -100,7 +141,15 @@ function PositionSizing() {
 }
 
 function GenRandom(min, max) {
-    return Math.floor(Math.random() * (max - min +1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function ChangePageSection(e) {
+    for (var i = 0; i < PageSections.length; i++) {
+        if (PageSections[i][0] == e) {
+            CreateTabs(PageSections[i][2], 'topbar', PageSections[i][2][0][0]);
+        }
+    }
 }
 
 setTimeout(PositionSizing(), 10);
