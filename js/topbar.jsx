@@ -12,7 +12,7 @@ var TopBarTabButton = React.createClass({
             { "selected": (this.props.selected == this.props.name) }
         );
         return (
-            <div className="topbar-tab" onClick={this.onClicked}>
+            <div className="topbar-tab no-select" onClick={this.onClicked}>
                 {this.props.name}
                 <div className={selectorClassName}/>
             </div>

@@ -260,3 +260,15 @@ body {
         padding-right: 20px;
     }
 }
+
+#copyright {
+    position    : absolute;
+    width       : 100%;
+    left        : 0;
+    height      : 30px;
+    bottom      : 0;
+    color       : white;
+    font-style  : italic;
+    font-size   : 10px;
+    padding-left: 8px;
+}

@@ -13,12 +13,9 @@ var PageTab = React.createClass({
         var notificationStyle = {
             display: (this.props.notificationCount > 0 ? "block" : "none")
         }
-        var classname = classNames(
-            "page-tabs-" + this.props.name.toLowerCase(),
-            "tab",
-            "no-select",
-            { "selected": this.props.selected == this.props.name }
-        );
+        var classname = classNames("page-tabs-" + this.props.name.toLowerCase(), "tab", "no-select", {
+            "selected": this.props.selected == this.props.name
+        });
         return (
             <div className={classname} onClick={this.onClicked}>
                 <div className="img" style={elemStyle}></div>
@@ -35,9 +32,7 @@ var PageTab = React.createClass({
 
 var PageTabBar = React.createClass({
     getInitialState: function() {
-        return {
-            selected: this.props.items[0][0]
-        }
+        return {selected: this.props.selected}
     },
     handleClick: function(e, t) {
         this.setState({selected: e});
@@ -57,7 +52,15 @@ var PageTabBar = React.createClass({
     }
 });
 
-function CreatePageBar(e, t)
-{
-    ReactDOM.render(<PageTabBar items={e} />, document.getElementById(t));
+function CreatePageBar(e, t) {
+    var selected = e[0][0];
+
+    for (var i = 0; i < e.length; i++) {
+        if (e[i][2]) {
+            selected = e[i][0];
+        }
+    }
+
+    ReactDOM.render(<PageTabBar items={e} selected={selected}/>,
+        document.getElementById(t));
 }

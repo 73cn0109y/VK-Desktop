@@ -50,7 +50,7 @@ function main() {
         [ "Music", GenRandom(-10, 10) ],
         [ "Messages", GenRandom(-10, 10) ],
         [ "Communities", GenRandom(-10, 10) ],
-        [ "News", GenRandom(-10, 10) ],
+        [ "News", GenRandom(-10, 10), true ],
         [ "Feedback", GenRandom(-10, 10) ],
         [ "Bookmarks", GenRandom(-10, 10) ],
         [ "Settings", GenRandom(-10, 10) ]

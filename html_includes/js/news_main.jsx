@@ -44,7 +44,7 @@ var NewsItem = React.createClass({
         return (
             <div id={this.props.data.ID} className="news-item" style={style}>
                 <div className="header">
-                    <div className="user-picture">
+                    <div className="user-picture no-select">
                         <CircleImage size={[49, 49]} />
                     </div>
                     <div className="item-title">
@@ -53,7 +53,7 @@ var NewsItem = React.createClass({
                     <div className="item-timediff">
                         18 minutes ago
                     </div>
-                    <div className="item-hide">X</div>
+                    <div className="item-hide no-select">X</div>
                     <hr className={headerSplitClass} />
                 </div>
                 <div className="content">
@@ -122,7 +122,7 @@ function SampleNews()
 {
     var news = new Array();
     news.push(new NewsData(0, "Item 0", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", null));
-    news.push(new NewsData(1, "Item 1", "Let's get it started!", null));
+    news.push(new NewsData(1, "Item 1", "Let's get it started!", "./imgs/news/001.jpg"));
     news.push(new NewsData(2, "Item 2", "Let's get it started!", null));
     news.push(new NewsData(3, "Item 3", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", "./imgs/news/001.jpg"));
     news.push(new NewsData(4, "Item 4", "My new track Lift Me Up is finally out.. I must admit.. I'm very proud of this one. Thanks for all your support!!", null));
