@@ -5,7 +5,7 @@ var RoundedImage = React.createClass({
             height: this.props.size[1] + "px"
         };
         return(
-            <ReactBootstrap.Image style={style} src="https://react-bootstrap.github.io/assets/thumbnail.png" rounded />
+            <ReactBootstrap.Image className={this.props.additionalClass} style={style} src="https://react-bootstrap.github.io/assets/thumbnail.png" rounded />
         );
     }
 });
@@ -17,7 +17,7 @@ var CircleImage = React.createClass({
             height: this.props.size[1] + "px"
         };
         return(
-            <ReactBootstrap.Image style={style} src="https://react-bootstrap.github.io/assets/thumbnail.png" circle />
+            <ReactBootstrap.Image className={this.props.additionalClass} style={style} src="https://react-bootstrap.github.io/assets/thumbnail.png" circle />
         );
     }
 });
@@ -29,7 +29,7 @@ var ThumbnailImage = React.createClass({
             height: this.props.size[1] + "px"
         };
         return(
-            <ReactBootstrap.Image style={style} src="https://react-bootstrap.github.io/assets/thumbnail.png" thumbnail />
+            <ReactBootstrap.Image className={this.props.additionalClass} style={style} src="https://react-bootstrap.github.io/assets/thumbnail.png" thumbnail />
         );
     }
 });

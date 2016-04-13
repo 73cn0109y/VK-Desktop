@@ -34,7 +34,7 @@ var NewsItem = React.createClass({
         });
         var style = {
             "width": (this.props.width == 0
-                ? "44%"
+                ? "46%"
                 : this.props.width)
         };
         var bgImage = (this.props.data.Image == null
@@ -92,9 +92,9 @@ var NewsPage = React.createClass({
     updateDimensions: function() {
         var target = document.getElementById(this.props.containerID);
         var width = target.offsetWidth;
-        width *= 0.95; // minus 5% on each side
+        width *= 0.98;
         width /= 2;
-        width *= 0.925;
+        width *= 0.96;
         this.setState({width: width});
     },
     componentWillMount: function() {
@@ -150,11 +150,11 @@ function PositionNewsItems() {
 
     for (var i = 0; i < itemInfo.length; i++) {
         if (colPositions[0] <= colPositions[1]) {
-            itemInfo[i][0].style.left = "5%";
+            itemInfo[i][0].style.left = "2%";
             itemInfo[i][0].style.top = colPositions[0];
             colPositions[0] += itemInfo[i][1] + 10;
         } else {
-            itemInfo[i][0].style.left = "50%";
+            itemInfo[i][0].style.left = "51%";
             itemInfo[i][0].style.top = colPositions[1];
             colPositions[1] += itemInfo[i][1] + 10;
         }

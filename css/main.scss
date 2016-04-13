@@ -81,6 +81,15 @@ body {
     .content {
         box-shadow: 0 0 10px $dropshadow-color;
     }
+
+    #Messenger {
+        position: absolute;
+        left    : 0;
+        top     : 0;
+        width   : 100%;
+        height  : 100%;
+        border  : none;
+    }
 }
 
 .content {

@@ -1,20 +1,18 @@
-var NewsTabs = [
-    [
-        "News", "html_includes/news.html"
-    ],
-    [
-        "Update", "html_includes/update.html"
-    ],
-    ["Comments", "html_includes/comments.html"]
+var ProfileTabs = [
+    [ "My Profile", ""]
 ];
 
-var CommunityTabs = [
-    [
-        "My communities", ""
-    ],
-    [
-        "Managed communities", ""
-    ]
+var FriendsTabs=[
+    ["My Friends", ""],
+    ["Recommended", ""]
+];
+
+var PhotosTabs=[
+    ["My Photos", ""]
+];
+
+var VideosTabs=[
+    ["My Videos", ""]
 ];
 
 var MusicTabs = [
@@ -38,22 +36,63 @@ var MusicTabs = [
     ]
 ];
 
+var MessagesTabs=[
+    ["My Messages", ""]
+];
+
+var CommunityTabs = [
+    [
+        "My communities", ""
+    ],
+    [
+        "Managed communities", ""
+    ]
+];
+
+var NewsTabs = [
+    [
+        "News", "html_includes/news.html"
+    ],
+    [
+        "Update", "html_includes/update.html"
+    ],
+    ["Comments", "html_includes/comments.html"]
+];
+
+var FeedbackTabs=[
+    ["My Feedback", ""]
+];
+
+var BookmarksTabs=[
+    ["My Bookmarks", ""]
+];
+
+var SettingsTabs=[
+    ["Profile Settings", ""],
+    ["Privacy Settings", ""],
+    ["Site Settings", ""]
+];
+
 var PageSections = [
     [
         "Profile",
-        GenRandom(-10, 10)
+        GenRandom(-10, 10),
+        ProfileTabs
     ],
     [
         "Friends",
-        GenRandom(-10, 10)
+        GenRandom(-10, 10),
+        FriendsTabs
     ],
     [
         "Photos",
-        GenRandom(-10, 10)
+        GenRandom(-10, 10),
+        PhotosTabs
     ],
     [
         "Videos",
-        GenRandom(-10, 10)
+        GenRandom(-10, 10),
+        VideosTabs
     ],
     [
         "Music",
@@ -62,7 +101,8 @@ var PageSections = [
     ],
     [
         "Messages",
-        GenRandom(-10, 10)
+        GenRandom(-10, 10),
+        MessagesTabs
     ],
     [
         "Communities",
@@ -77,20 +117,24 @@ var PageSections = [
     ],
     [
         "Feedback",
-        GenRandom(-10, 10)
+        GenRandom(-10, 10),
+        FeedbackTabs
     ],
     [
         "Bookmarks",
-        GenRandom(-10, 10)
+        GenRandom(-10, 10),
+        BookmarksTabs
     ],
     [
         "Settings",
-        GenRandom(-10, 10)
+        GenRandom(-10, 10),
+        SettingsTabs
     ]
 ];
 
-function main() {
-    window.ContainerTarget = document.getElementById("mainContent");
+$(document).ready(function(){
+    window.ContainerTarget = $("#mainContent");
+    window.MessageTarget = $("#Messenger");
 
     CreatePageBar(PageSections, 'page-tabs', ChangePageSection);
     for(var i = 0; i < PageSections.length; i++){
@@ -99,20 +143,10 @@ function main() {
     }
 
     CreateCircleImage(49, 49, "profile-picture");
-    /*CreateTabs([
-        [
-            "News", "html_includes/news.html"
-        ],
-        [
-            "Update", "html_includes/update.html"
-        ],
-        ["Comments", "html_includes/comments.html"]
-    ], 'topbar');*/
 
-    window.ContainerTarget.contentWindow.location.href = "html_includes/news.html";
-}
-
-main();
+    window.ContainerTarget.attr("src", "html_includes/news.html");
+    window.MessageTarget.attr("src", "html_includes/messenger/index.html");
+});
 
 window.onresize = function(e) {
     PositionSizing();
